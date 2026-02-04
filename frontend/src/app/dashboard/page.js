@@ -18,7 +18,7 @@ export default function Dashboard() {
     if (!token) return;
 
     Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/assets`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://office-inventory-o5uy.vercel.app/'}/api/assets`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then(async (res) => {
@@ -29,7 +29,7 @@ export default function Dashboard() {
           }
           return res.json();
         }),
-      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/reports/low-stock`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://office-inventory-o5uy.vercel.app/'}/api/reports/low-stock`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then(async (res) => {
