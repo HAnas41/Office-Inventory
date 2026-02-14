@@ -4,7 +4,9 @@ const cors = require("cors");
 const app = express();
 
 // Enable CORS
-app.use(cors());
+app.use(cors({
+  origin: 'https://office-inventory-silk.vercel.app'
+}));
 
 // Body parser middleware
 app.use(express.json());
