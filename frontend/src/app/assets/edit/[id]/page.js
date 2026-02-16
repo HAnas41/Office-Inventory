@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter, useParams } from "next/navigation";
+import API_URL from "@/utils/api";
 
 export default function EditAssetPage() {
   const { id } = useParams();
@@ -29,7 +30,7 @@ export default function EditAssetPage() {
   useEffect(() => {
     if (!token) return;
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/assets/${id}`, {
+    fetch(`${API_URL}/api/assets/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -78,7 +79,7 @@ export default function EditAssetPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/assets/${id}`, {
+      const res = await fetch(`${API_URL}/api/assets/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import API_URL from "@/utils/api";
 
 export default function AddAssetPage() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function AddAssetPage() {
 
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users`, {
+        const res = await fetch(`${API_URL}/api/users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -81,7 +82,7 @@ export default function AddAssetPage() {
         submitData.assignedTo = null;
       }
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/assets`, {
+      const res = await fetch(`${API_URL}/api/assets`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

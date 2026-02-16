@@ -5,6 +5,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import API_URL from "@/utils/api";
 
 export default function AssetsPage() {
   const { user } = useAuth();
@@ -16,7 +17,7 @@ export default function AssetsPage() {
   useEffect(() => {
     if (!token) return;
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/assets`, {
+    fetch(`${API_URL}/api/assets`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -52,7 +53,7 @@ export default function AssetsPage() {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/assets/${assetId}`, {
+      const res = await fetch(`${API_URL}/api/assets/${assetId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

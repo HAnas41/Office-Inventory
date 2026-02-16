@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import API_URL from "@/utils/api";
 
 export default function CategoriesPage() {
   const { user } = useAuth();
@@ -26,7 +27,7 @@ export default function CategoriesPage() {
           return;
         }
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/categories`, {
+        const res = await fetch(`${API_URL}/api/categories`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -63,7 +64,7 @@ export default function CategoriesPage() {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/categories`, {
+      const res = await fetch(`${API_URL}/api/categories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +97,7 @@ export default function CategoriesPage() {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/categories/${id}`, {
+      const res = await fetch(`${API_URL}/api/categories/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -151,7 +152,7 @@ export default function CategoriesPage() {
           <input
             type="text"
             value={newCategory.name}
-            onChange={(e) => setNewCategory({...newCategory, name: e.target.value})}
+            onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
             required
             className="w-full border p-2 rounded"
           />
@@ -162,7 +163,7 @@ export default function CategoriesPage() {
           <input
             type="text"
             value={newCategory.description}
-            onChange={(e) => setNewCategory({...newCategory, description: e.target.value})}
+            onChange={(e) => setNewCategory({ ...newCategory, description: e.target.value })}
             className="w-full border p-2 rounded"
           />
         </div>

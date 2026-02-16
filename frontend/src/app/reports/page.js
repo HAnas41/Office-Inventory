@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import API_URL from "@/utils/api";
 
 export default function ReportsPage() {
   const { user } = useAuth();
@@ -20,16 +21,16 @@ export default function ReportsPage() {
     const fetchReports = async () => {
       try {
         const [categoryRes, locationRes, damagedRes, lowStockRes] = await Promise.allSettled([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/reports/assets-by-category`, {
+          fetch(`${API_URL}/api/reports/assets-by-category`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/reports/assets-by-location`, {
+          fetch(`${API_URL}/api/reports/assets-by-location`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/reports/damaged-assets`, {
+          fetch(`${API_URL}/api/reports/damaged-assets`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/reports/low-stock`, {
+          fetch(`${API_URL}/api/reports/low-stock`, {
             headers: { Authorization: `Bearer ${token}` },
           })
         ]);

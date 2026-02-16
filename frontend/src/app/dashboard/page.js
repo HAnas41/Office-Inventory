@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { KPI } from "@/components/KPI";
+import API_URL from "@/utils/api";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -18,7 +19,7 @@ export default function Dashboard() {
     if (!token) return;
 
     Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://office-inventory-o5uy.vercel.app/'}/api/assets`, {
+      fetch(`${API_URL}/api/assets`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then(async (res) => {
@@ -29,7 +30,7 @@ export default function Dashboard() {
           }
           return res.json();
         }),
-      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://office-inventory-o5uy.vercel.app/'}/api/reports/low-stock`, {
+      fetch(`${API_URL}/api/reports/low-stock`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then(async (res) => {

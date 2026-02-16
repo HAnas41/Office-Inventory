@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import API_URL from "@/utils/api";
 
 export default function UsersPage() {
   const { user } = useAuth();
@@ -12,7 +13,7 @@ export default function UsersPage() {
   useEffect(() => {
     if (!token || user.role !== "admin") return;
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users`, {
+    fetch(`${API_URL}/api/users`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(async (res) => {
@@ -38,7 +39,7 @@ export default function UsersPage() {
 
   const updateRole = async (id, newRole) => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/${id}`, {
+      const res = await fetch(`${API_URL}/api/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +56,7 @@ export default function UsersPage() {
 
       const updatedUser = await res.json();
       setUsers(prevUsers =>
-        prevUsers.map(u => u._id === id ? {...u, role: newRole} : u)
+        prevUsers.map(u => u._id === id ? { ...u, role: newRole } : u)
       );
     } catch (err) {
       console.error("Error updating user role:", err);
@@ -66,7 +67,7 @@ export default function UsersPage() {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/${id}`, {
+      const res = await fetch(`${API_URL}/api/users/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
