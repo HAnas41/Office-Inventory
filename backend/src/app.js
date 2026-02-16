@@ -1,7 +1,19 @@
 const express = require("express");
 const cors = require("cors");
+const connectDB = require("./config/db");
 
 const app = express();
+
+// Connect to database on every request (Vercel/Serverless pattern)
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection failed in middleware:", error);
+    res.status(500).json({ message: "Database connection failed", error: error.message });
+  }
+});
 
 // Enable CORS
 const allowedOrigins = [

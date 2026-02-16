@@ -6,7 +6,8 @@ const app = require("./app");
 dotenv.config();
 
 // Connect to database
-connectDB();
+// Connect to database (Handled in app.js for Vercel, but we kept import for consistency)
+// connectDB(); // Removed to avoid double connection / race conditions
 
 const PORT = process.env.PORT || 5000;
 
